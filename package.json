@@ -4,7 +4,7 @@
   "description": "backend for a evenTicket: an app where users can make events and share them",
   "main": "index.js",
   "scripts": {
-    "test": "npm run test",
+    "start": "node index.js",
     "dev": "nodemon index.js"
   },
   "author": "Alexis",
@@ -16,7 +16,9 @@
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.3.0",
-    "mongoose": "^8.1.1",
-    "nodemon": "^3.0.3"
+    "mongoose": "^8.1.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
   }
 }

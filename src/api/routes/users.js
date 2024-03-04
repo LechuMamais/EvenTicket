@@ -1,5 +1,5 @@
 const { isAuth } = require("../../middlewares/auth");
-const { getUsers, getUserById, register, login, updateUser, deleteUser } = require("../controllers/users");
+const { getUsers, getUserById, register, login, updateUser, deleteUser, signUpForEvent } = require("../controllers/users");
 
 const usersRouter = require("express").Router();
 
@@ -9,5 +9,7 @@ usersRouter.post("/register", register);
 usersRouter.post("/login", login);
 usersRouter.put("/:id", [isAuth], updateUser);
 usersRouter.delete("/:id", isAuth, deleteUser);
+
+usersRouter.put("/attendees/:eventId", isAuth, signUpForEvent)
 
 module.exports = usersRouter;

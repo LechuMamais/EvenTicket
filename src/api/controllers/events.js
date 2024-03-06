@@ -12,8 +12,21 @@ const getEvents = async (req, res, next) => {
 
 const getEventById = async (req, res, next) => {
     try {
-        const event = await Event.findById(req.params.id);
-        return res.status(200).json(event);
+        const id = req.params;
+        // buscar un evento con el id que llegue por params
+        const event = await Event.findById(id.id);
+        // obtener la lista de usuarios que están inscritos al evento como asistentes.
+        const attendees = await User.find({ eventsAsAttendee: id.id });
+        for (const attend of attendees) {
+            attend.password = '';
+        }
+        const organizers = await User.find({ eventsAsOrganizer: id.id });
+        for (const organizer of organizers) {
+            organizer.password = '';
+        }
+        const eventDetailsAndAttendees = {event, organizers, attendees};
+
+        return res.status(200).json(eventDetailsAndAttendees);
     } catch (error) {
         return(res.status(404).json(error));
     }
@@ -25,6 +38,7 @@ const createEvent = async (req, res, next) => {
         const newEvent = new Event(req.body);
         // Guardar el evento en la base de datos
         await newEvent.save();
+
         // Agregar el evento a la lista de eventos organizados por el usuario
         await User.findByIdAndUpdate(userId, { $push: { eventsAsOrganizer: newEvent._id } });
         
@@ -55,20 +69,4 @@ const deleteEvent = async (req, res, next) => {
 };
 
 
-/* --------------------------------------------------------------------------------------------------------------------------------*/
-
-
-// Controlador para obtener usuarios que están inscritos en un evento específico.
-const getEventAttendees = async (req, res) => {
-    try {
-        const { eventId } = req.params;
-
-        // Buscar todos los usuarios que tienen el evento en su lista de eventsAsAttendee
-        const users = await User.find({ eventsAsAttendee: eventId });
-        res.status(200).json({ users });
-    } catch (error) {
-        res.status(500).json({ message: 'Error al obtener los asistentes del evento', error: error.message });
-    }
-};
-
-module.exports = { getEvents, getEventById, createEvent, updateEvent, deleteEvent, getEventAttendees };
+module.exports = { getEvents, getEventById, createEvent, updateEvent, deleteEvent };

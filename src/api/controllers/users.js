@@ -62,9 +62,8 @@ const updateUser = async (req, res, next) => {
         }
         const newUser = new User(req.body);
         newUser._id = id;
-        // Para que al modificar algun dato del usuario no se pierda su array de libros favoritos, vamos a defirle que su
+        // Para que al modificar algun dato del usuario no se pierda su array de eventos favoritos, vamos a defirle que su
         // array de favoritos sea el del anterior mas los nuevos.
-        // Esto aplica incluso para la funcion de agregarle libros favoritos al usuario.
         const oldUser = await User.findById(id);
         newUser.eventsAsAttendee = [...oldUser.eventsAsAttendee, newUser.eventsAsAttendee];
         newUser.eventsAsOrganizer = [...oldUser.eventsAsOrganizer, newUser.eventsAsOrganizer];
@@ -94,7 +93,7 @@ const deleteUser = async (req, res, next) => {
 const signUpForEvent = async (req, res) => {
     try {
         const { eventId } = req.params;
-        const userId = req.user._id; // Se supone que tienes middleware para autenticar y obtener el usuario actual
+        const userId = req.user._id;
         
         // Verificar si el evento existe
         const event = await Event.findById(eventId);
@@ -111,4 +110,22 @@ const signUpForEvent = async (req, res) => {
     }
 };
 
-module.exports = { getUsers, getUserById, updateUser, register, deleteUser, login, signUpForEvent };
+const removeAttendance = async (req, res, next) => {
+    try {
+        const { eventId } = req.params;
+        const userId = req.user._id;
+        
+        // Actualizar el usuario para quitar el evento de la lista de eventos como asistente
+        const user = await User.findByIdAndUpdate(userId, { $pull: { eventsAsAttendee: eventId } });
+
+        if (!user) {
+            return res.status(404).json({ message: "Usuario no encontrado" });
+        }
+
+        res.status(200).json({ message: "Asistencia al evento eliminada correctamente" });
+    } catch (error) {
+        return res.status(500).json({ message: "Error al quitar asistencia al evento", error: error.message });
+    }
+};
+
+module.exports = { getUsers, getUserById, updateUser, register, deleteUser, login, signUpForEvent, removeAttendance };

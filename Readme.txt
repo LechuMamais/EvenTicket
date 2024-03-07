@@ -1,0 +1,15 @@
+Próximas mejoras:
+- Quitar asistencia a evento
+- Ocultar Login y Register una vez iniciada la session
+- Organizar mejor la vista de las cosas en las páginas:
+    - Eventos
+    - EventDetail
+    - Profile
+- UpdateEvent:
+    - Boton
+    - Component
+    - Formulario
+- UpdateProfile:
+    - Boton
+    - Component
+    - Formulario

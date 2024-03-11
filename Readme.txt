@@ -4,17 +4,17 @@ Hecho:
 - Agregar Funcionalidad: UpdateEvent:
     - Boton
     - Component
+    - Formulario 
+
+- Agregar Funcionalidad: UpdateProfile:
+    - Boton
+    - Component
     - Formulario
 
 
 --------------------------------------------------------------------------------
 
 Próximas mejoras:
-
-- Agregar Funcionalidad: UpdateProfile:
-    - Boton
-    - Component
-    - Formulario
 
 - UI: Organizar mejor la vista de las cosas en las páginas:
     - Eventos

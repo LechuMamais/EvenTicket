@@ -4,7 +4,6 @@ const { getEvents, getEventById, createEvent, updateEvent, deleteEvent } = requi
 const eventsRouter = require("express").Router();
 
 eventsRouter.get("/:id", getEventById);
-
 eventsRouter.get("/", getEvents);
 eventsRouter.post("/newEvent/:userId", isAuth, createEvent);
 eventsRouter.put("/:id", isAuth, updateEvent);

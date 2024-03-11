@@ -2,11 +2,12 @@ const mongoose = require('mongoose');
 
 const eventSchema = new mongoose.Schema({
     title: {type: String, required: true},
-    date: {type: String, required: true},
+    date: {type: Date, required: true},
     location: {type: String, required: true},
     description: {type: String, required: false},
     img: {type: String, required: false},
-    totalAttendees: {type: Number, default: 0, required: true}
+    createdBy: {type: mongoose.Types.ObjectId, required: true, ref: "users"},
+    assistants: [{type: mongoose.Types.ObjectId, required: true, default: {}, ref: "users"}],
 },{
     timestamps:true,
     collectionName: "events"

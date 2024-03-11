@@ -1,7 +1,9 @@
 const { generateKey } = require("../../utils/jwt");
-const Event = require("../models/events");
 const User = require("../models/users");
 const bcrypt = require('bcrypt');
+
+
+//  --------------------------------------------    CRUD    --------------------------------------------  //
 
 const getUsers = async (req, res, next) => {
     try {
@@ -53,7 +55,6 @@ const login = async (req, res, next) => {
     }
 }
 
-
 const updateUser = async (req, res, next) => {
     try {
         const { id } = req.params;
@@ -87,45 +88,28 @@ const deleteUser = async (req, res, next) => {
 };
 
 
-/*--------------------------------------------------------------------------------------------------------------------------------------------*/
+//  ----------------------------------------    MANEJAR ASISTENCIA    ----------------------------------------  //
 
 // Controlador para inscribir un usuario a un evento
-const signUpForEvent = async (req, res) => {
+const addAssistantToUserEventsAsAttendee = async (req, res, next) =>{
     try {
-        const { eventId } = req.params;
-        const userId = req.user._id;
-        
-        // Verificar si el evento existe
-        const event = await Event.findById(eventId);
-        if (!event) {
-            return res.status(404).json({ message: 'Evento no encontrado' });
-        }
-
-        // Agregar el evento a la lista de eventos del usuario como asistente
-        await User.findByIdAndUpdate(userId, { $push: { eventsAsAttendee: eventId } });
-
-        res.status(200).json({ message: 'Inscripción exitosa al evento', event });
+        const { userId, eventId } = req.params;
+        const assistant = await User.findByIdAndUpdate(userId, { $push: { eventsAsAttendee: eventId } });
+        return res.status(200).json(assistant);
     } catch (error) {
-        res.status(500).json({ message: 'Error al inscribirse en el evento', error: error.message });
+        return (res.status(404).json(error));
     }
-};
+}
 
-const removeAttendance = async (req, res, next) => {
+// Controlador para cancelar asistencia a un evento
+const removeAssistantToUserEventsAsAttendee = async (req, res, next) =>{
     try {
-        const { eventId } = req.params;
-        const userId = req.user._id;
-        
-        // Actualizar el usuario para quitar el evento de la lista de eventos como asistente
-        const user = await User.findByIdAndUpdate(userId, { $pull: { eventsAsAttendee: eventId } });
-
-        if (!user) {
-            return res.status(404).json({ message: "Usuario no encontrado" });
-        }
-
-        res.status(200).json({ message: "Asistencia al evento eliminada correctamente" });
+        const { userId, eventId } = req.params;
+        const assistant = await User.findByIdAndUpdate(userId, { $pull: { eventsAsAttendee: eventId } });
+        return res.status(200).json(assistant);
     } catch (error) {
-        return res.status(500).json({ message: "Error al quitar asistencia al evento", error: error.message });
+        return (res.status(404).json(error));
     }
-};
+}
 
-module.exports = { getUsers, getUserById, updateUser, register, deleteUser, login, signUpForEvent, removeAttendance };
+module.exports = { getUsers, getUserById, updateUser, register, deleteUser, login, addAssistantToUserEventsAsAttendee, removeAssistantToUserEventsAsAttendee };

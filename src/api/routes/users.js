@@ -10,7 +10,4 @@ usersRouter.post("/login", login);
 usersRouter.put("/:id", [isAuth], updateUser);
 usersRouter.delete("/:id", [isAuth], deleteUser);
 
-usersRouter.put("/removeAttendance/:eventId", [isAuth], removeAttendance);
-//usersRouter.put("/attendees/:eventId", [isAuth], signUpForEvent)
-
 module.exports = usersRouter;

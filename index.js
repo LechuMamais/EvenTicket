@@ -4,6 +4,7 @@ const cors = require('cors');
 const { connectDB } = require("./src/config/db");
 const eventsRouter = require("./src/api/routes/events");
 const usersRouter = require("./src/api/routes/users");
+const ManageAssistanceRouter = require("./src/api/routes/manageAssitance");
 
 const app = express();
 
@@ -19,6 +20,7 @@ app.use(cors({
 // Definición de las rutas del API
 app.use("/api/events", eventsRouter);
 app.use("/api/users", usersRouter);
+app.use("/api/manageAssistance", ManageAssistanceRouter)
 
 // Ruta de prueba de ping
 app.use("/api/ping", (req, res, next) => {

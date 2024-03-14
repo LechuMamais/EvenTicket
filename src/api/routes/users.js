@@ -10,4 +10,7 @@ usersRouter.post("/login", login);
 usersRouter.put("/:id", [isAuth], updateUser);
 usersRouter.delete("/:id", [isAuth], deleteUser);
 
+// Check if user is already logged in
+usersRouter.get("/checkLogged/:id", [isAuth], getUserById);
+
 module.exports = usersRouter;

@@ -6,11 +6,19 @@ const moment = require('moment');
 //  --------------------------------------------    CRUD    --------------------------------------------  //
 
 const getEvents = async (req, res, next) => {
+    // Este controller será capaz de recibir fechas, y devolver los eventos entre esas fechas.
+    // Si recibe solo 1 de los dos parametros, el otro será una fecha límite mega lejana en el tiempo
     try {
-        const events = await Event.find();
+        // Obtener los parámetros de consulta
+        const fromDate = req.query.fromDate || new Date(0); // Si no se proporciona fromDate, se establece en la fecha mínima (1/1/1970)
+        const toDate = req.query.toDate || new Date(8640000000000000); // Si no se proporciona toDate, se establece en la fecha máxima (31/12/2999)
+
+        // Consultar los eventos cuya fecha esté comprendida entre fromDate y toDate
+        const events = await Event.find({ date: { $gte: fromDate, $lte: toDate } });
+
         res.status(200).json(events);
     } catch (error) {
-        return (res.status(404).json(error));
+        return res.status(404).json(error);
     }
 };
 

@@ -5,7 +5,7 @@ const userSchema = new mongoose.Schema({
     userName: {type: String, required: true},
     email: {type: String, required: true},
     password: {type: String, required: true},
-    role: {type: String, enum: ["admin", "user"], default: "user", required: true},
+    role: {type: String, enum: ["admin", "organizer", "user"], default: "user", required: true},
     eventsAsAttendee: [
         {type: mongoose.Types.ObjectId, required: false, ref: "events"}
     ],

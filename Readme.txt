@@ -1,4 +1,4 @@
-Hecho:
+Mejoras hechas:
 - Funcionalidad: quitar asistencia a evento
 - Ocultar Login y Register una vez iniciada la sesion
 - Agregar Funcionalidad: UpdateEvent:
@@ -30,25 +30,27 @@ Hecho:
 
 - Header: ocultar el link a profile, que se muestra con texto null
     
+- Manejo de fechas:
+    - 0rdenar eventos por fechas
+
+- Componente profile: mostrar un span "No hay eventos en tu lista" si la lista
+    está vacía, tanto en la lista de as organizer como en la de as attendee
+
+- Filtros por fechas
+
 
 --------------------------------------------------------------------------------
 
 Próximas mejoras:
 
-- Manejo de fechas:
-    - 0rdenar eventos por fechas
     - Poder tener un calendario de eventos a los que va como asistente.
 
-- Componente profile: mostrar un span "No hay eventos en tu lista" si la lista
-    está vacía, tanto en la lista de as organizer como en la de as attendee
-
+- Filtros de busqueda: busqueda por palabras
 
 - UI: Organizar mejor la vista de las cosas en las páginas:
     - Eventos
     - EventDetail
     - Profile
-
-- Profile: no funcionan los links a eventDetails
 
 
 --------------------------------------------------------------------------------

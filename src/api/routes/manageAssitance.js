@@ -6,8 +6,8 @@ const { addAssistantToUserEventsAsAttendee, removeAssistantToUserEventsAsAttende
 const ManageAssistanceRouter = require("express").Router();
 
 // Tenemos dos controladores por ruta:
-// Uno para agregar el evento a la lista de asistencias del usuario
-// Otro para agregar el usuario la lista de asistentes al evento.
+// Uno para agregar/quitar el evento a la lista de asistencias del usuario
+// Otro para agregar/quitar el usuario la lista de asistentes al evento.
 ManageAssistanceRouter.put("/addAssistance/:userId/:eventId", [isAuth], addAssistantToUserEventsAsAttendee, addAssistantToEventAssistantsList );
 ManageAssistanceRouter.put("/removeAssistance/:userId/:eventId", [isAuth], removeAssistantToUserEventsAsAttendee, removeAssistantToEventAssistantsList );
 

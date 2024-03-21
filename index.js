@@ -2,12 +2,10 @@ require("dotenv").config();
 const express = require('express');
 const PORT = process.env.PORT || 3000;
 const cors = require('cors');
-//const config = require("./src/config/config");
 const { connectDB } = require("./src/config/db");
 const eventsRouter = require("./src/api/routes/events");
 const usersRouter = require("./src/api/routes/users");
 const ManageAssistanceRouter = require("./src/api/routes/manageAssitance");
-
 
 const app = express();
 
@@ -15,17 +13,23 @@ const app = express();
 connectDB();
 app.use(express.json());
 
-// Configuración de CORS después de la inicialización de la aplicación
-app.use(cors({
-    origin: '*',
-    credentials: true
-}));
-
+// Middleware para habilitar CORS
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5173');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    if (req.method === 'OPTIONS') {
+        res.sendStatus(200); // Responder con éxito a las solicitudes OPTIONS
+    } else {
+        next(); // Sigue con el siguiente middleware para otras solicitudes
+    }
+});
 
 // Definición de las rutas del API
 app.use("/api/events", eventsRouter);
 app.use("/api/users", usersRouter);
-app.use("/api/manageAssistance", ManageAssistanceRouter)
+app.use("/api/manageAssistance", ManageAssistanceRouter);
 
 // Ruta de prueba de ping
 app.use("/api/ping", (req, res, next) => {

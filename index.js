@@ -1,5 +1,6 @@
 require("dotenv").config();
 const express = require('express');
+const PORT = process.env.PORT || 3000;
 const cors = require('cors');
 const { connectDB } = require("./src/config/db");
 const eventsRouter = require("./src/api/routes/events");
@@ -38,7 +39,6 @@ app.use("*", (req, res, next) => {
 });
 
 // Escuchar en el puerto 3000
-const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Servidor iniciado en http://localhost:${PORT}`);
 });

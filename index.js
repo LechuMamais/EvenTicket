@@ -17,9 +17,9 @@ app.use(express.json());
 
 // Configuración de CORS después de la inicialización de la aplicación
 app.use(cors({
-    origin: 'https://even-ticket-j1bwy96gt-lechumamais-projects.vercel.app',
+    origin: 'http://localhost:5173',
     credentials: true
-  }));
+}));
 
 // Definición de las rutas del API
 app.use("/api/events", eventsRouter);

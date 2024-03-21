@@ -7,6 +7,8 @@ const eventsRouter = require("./src/api/routes/events");
 const usersRouter = require("./src/api/routes/users");
 const ManageAssistanceRouter = require("./src/api/routes/manageAssitance");
 
+const config = require("./src/config/config");
+
 const app = express();
 
 // Inicializar la aplicación Express
@@ -14,9 +16,9 @@ connectDB();
 app.use(express.json());
 
 // Configuración de CORS después de la inicialización de la aplicación
-app.use(cors({
-    origin: "http://localhost:5173/"
-}));
+app.use(cors(
+    config.application.cors.server
+));
 
 // Definición de las rutas del API
 app.use("/api/events", eventsRouter);

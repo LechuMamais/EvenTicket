@@ -14,7 +14,7 @@ connectDB();
 app.use(express.json());
 
 // Middleware para habilitar CORS y Cache Control
-app.use((req, res, next) => {
+/*app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5173, http://localhost:5173/, localhost:5173/, localhost:5173');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
@@ -30,7 +30,7 @@ app.use((req, res, next) => {
     
     // Si no es una solicitud OPTIONS, continuar con el siguiente middleware
     next();
-});
+});*/
 
 
 // Definición de las rutas del API

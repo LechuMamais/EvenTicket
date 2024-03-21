@@ -16,16 +16,9 @@ connectDB();
 app.use(express.json());
 
 // Configuración de CORS después de la inicialización de la aplicación
-/*app.use(cors(
+app.use(cors(
     config.server
-));*/
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method');
-    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
-    res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
-    next();
-});
+));
 
 // Definición de las rutas del API
 app.use("/api/events", eventsRouter);

@@ -17,7 +17,7 @@ app.use(express.json());
 
 // Configuración de CORS después de la inicialización de la aplicación
 app.use(cors(
-    config.application.cors.server
+    config.server
 ));
 
 // Definición de las rutas del API

@@ -13,11 +13,6 @@ const headers = async (req,res, next) =>{
             return next();
         }
 
-        //Prueba mia:
-        if (req.method === 'GET') {
-            return next();
-        }
-        
         // Si no es una solicitud OPTIONS, continuar con el siguiente middleware
         next();
     } catch (error) {

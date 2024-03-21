@@ -15,7 +15,7 @@ app.use(express.json());
 
 // Configuración de CORS después de la inicialización de la aplicación
 app.use(cors({
-    
+    origin: "http://localhost:5173/"
 }));
 
 // Definición de las rutas del API

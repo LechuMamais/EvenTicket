@@ -2,7 +2,7 @@ require("dotenv").config();
 const express = require('express');
 const PORT = process.env.PORT || 3000;
 const cors = require('cors');
-const config = require("./src/config/config");
+//const config = require("./src/config/config");
 const { connectDB } = require("./src/config/db");
 const eventsRouter = require("./src/api/routes/events");
 const usersRouter = require("./src/api/routes/users");
@@ -16,7 +16,10 @@ connectDB();
 app.use(express.json());
 
 // Configuración de CORS después de la inicialización de la aplicación
-app.use(cors(config.server));
+app.use(cors({
+    origin: 'https://even-ticket-j1bwy96gt-lechumamais-projects.vercel.app',
+    credentials: true
+  }));
 
 // Definición de las rutas del API
 app.use("/api/events", eventsRouter);

@@ -11,14 +11,14 @@ const config = require("./src/config/config");
 
 const app = express();
 
-// Inicializar la aplicación Express
-connectDB();
-app.use(express.json());
-
 // Configuración de CORS después de la inicialización de la aplicación
 app.use(cors(
     config.server
 ));
+
+// Inicializar la aplicación Express
+connectDB();
+app.use(express.json());
 
 // Definición de las rutas del API
 app.use("/api/events", eventsRouter);

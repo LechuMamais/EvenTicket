@@ -12,6 +12,7 @@ const headers = async (req,res, next) =>{
         if (req.method === 'OPTIONS') {
             return next();
         }
+        console.log(res)
         
         // Si no es una solicitud OPTIONS, continuar con el siguiente middleware
         next();

@@ -22,12 +22,16 @@ app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Credentials', true);
     res.setHeader('Cache-Control', 'no-cache');
     res.setHeader('X-Content-Type-Options', 'nosniff');
+    
+    // Permitir que el middleware continúe con las solicitudes OPTIONS
     if (req.method === 'OPTIONS') {
-        res.sendStatus(200); // Responder con éxito a las solicitudes OPTIONS
-    } else {
-        next(); // Sigue con el siguiente middleware para otras solicitudes
+        return next();
     }
+    
+    // Si no es una solicitud OPTIONS, continuar con el siguiente middleware
+    next();
 });
+
 
 // Definición de las rutas del API
 app.use("/api/events", eventsRouter);

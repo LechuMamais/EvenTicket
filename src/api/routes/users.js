@@ -1,6 +1,6 @@
 const { isAuth } = require("../../middlewares/auth");
 const { headers } = require("../../middlewares/headers");
-const { getUsers, getUserById, register, login, updateUser, deleteUser, signUpForEvent, removeAttendance } = require("../controllers/users");
+const { getUsers, getUserById, register, login, updateUser, deleteUser } = require("../controllers/users");
 
 const usersRouter = require("express").Router();
 

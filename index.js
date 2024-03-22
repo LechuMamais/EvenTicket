@@ -9,9 +9,9 @@ const ManageAssistanceRouter = require("./src/api/routes/manageAssitance");
 
 const app = express();
 
-app.use(cors())
 // Inicializar la aplicación Express
 connectDB();
+app.use(cors())
 app.use(express.json());
 
 // Middleware para habilitar CORS y Cache Control

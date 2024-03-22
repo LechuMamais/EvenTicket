@@ -9,6 +9,7 @@ const ManageAssistanceRouter = require("./src/api/routes/manageAssitance");
 
 const app = express();
 
+app.use(cors())
 // Inicializar la aplicación Express
 connectDB();
 app.use(express.json());
@@ -31,7 +32,6 @@ app.use(express.json());
     // Si no es una solicitud OPTIONS, continuar con el siguiente middleware
     next();
 });*/
-app.use(cors())
 
 // Definición de las rutas del API
 app.use("/api/events", eventsRouter);

@@ -12,29 +12,13 @@ const app = express();
 // Inicializar la aplicación Express
 connectDB();
 app.use(express.json());
-// Utilizar el middleware cors
-app.use(cors());
 
-// Middleware para habilitar CORS y Cache Control
-/*app.use((req, res, next) => {
-    //res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5173, http://localhost:5173/, localhost:5173/, localhost:5173');
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5173, http://localhost:5173/, localhost:5173/, localhost:5173', '*');
-
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-    res.setHeader('Access-Control-Max-Age', '3600'); // Tiempo en segundos
-    res.setHeader('Access-Control-Allow-Credentials', true);
-    res.setHeader('Cache-Control', 'no-cache');
-    res.setHeader('X-Content-Type-Options', 'nosniff');
-    
-    // Permitir que el middleware continúe con las solicitudes OPTIONS
-    if (req.method === 'OPTIONS') {
-        return next();
-    }
-    
-    // Si no es una solicitud OPTIONS, continuar con el siguiente middleware
-    next();
-})*/
+// Middleware para configurar las cabeceras CORS
+app.use(cors({
+  origin: 'https://even-ticket-8dgto7diw-lechumamais-projects.vercel.app', // Puedes cambiar esto según el origen desde donde se realizan las solicitudes
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 
 // Definición de las rutas del API
 app.use("/api/events", eventsRouter);

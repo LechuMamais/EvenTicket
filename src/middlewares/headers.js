@@ -1,4 +1,4 @@
-const headers = async (req,res, next) =>{
+/*const headers = async (req,res, next) =>{
     try {
         res.setHeader('Access-Control-Allow-Origin', '*', 'http://localhost:5173/');
         res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
@@ -21,4 +21,4 @@ const headers = async (req,res, next) =>{
     }
 }
 
-module.exports = { headers };
+module.exports = { headers };*/

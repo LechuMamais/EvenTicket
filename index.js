@@ -12,18 +12,12 @@ const app = express();
 // Inicializar la aplicación Express
 connectDB();
 app.use(express.json());
-// Definición del middleware CORS personalizado
-/*app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*"); // o el origen específico desde donde se realizan las solicitudes
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-});*/
 
-// Middleware para configurar las cabeceras CORS
+// Middleware CORS
 app.use(cors({
-  origin: 'https://even-ticket-8dgto7diw-lechumamais-projects.vercel.app', // Puedes cambiar esto según el origen desde donde se realizan las solicitudes
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type', 'Authorization']
+    origin: "*", // o el origen específico desde donde se realizan las solicitudes
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept", "Authorization"]
 }));
 
 // Definición de las rutas del API

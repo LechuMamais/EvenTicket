@@ -9,14 +9,16 @@ const ManageAssistanceRouter = require("./src/api/routes/manageAssitance");
 
 const app = express();
 
+app.use(cors())
 // Inicializar la aplicación Express
 connectDB();
-app.use(cors())
 app.use(express.json());
 
 // Middleware para habilitar CORS y Cache Control
 /*app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5173, http://localhost:5173/, localhost:5173/, localhost:5173');
+    //res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5173, http://localhost:5173/, localhost:5173/, localhost:5173');
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5173, http://localhost:5173/, localhost:5173/, localhost:5173', '*');
+
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
     res.setHeader('Access-Control-Max-Age', '3600'); // Tiempo en segundos
@@ -31,7 +33,7 @@ app.use(express.json());
     
     // Si no es una solicitud OPTIONS, continuar con el siguiente middleware
     next();
-});*/
+})*/
 
 // Definición de las rutas del API
 app.use("/api/events", eventsRouter);

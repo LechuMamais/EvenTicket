@@ -31,7 +31,7 @@ app.use(express.json());
     // Si no es una solicitud OPTIONS, continuar con el siguiente middleware
     next();
 });*/
-
+app.use(cors())
 
 // Definición de las rutas del API
 app.use("/api/events", eventsRouter);

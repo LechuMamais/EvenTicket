@@ -12,6 +12,7 @@ usersRouter.put("/:id", [isAuth], updateUser);
 usersRouter.delete("/:id", [isAuth], deleteUser);
 
 // Check if user is already logged in
-usersRouter.get("/checkLogged/:id", [isAuth], getUserById);
+usersRouter.get("/checkLogged/:id", [isAuth], getUserById); // Esta ruta utiliza el mismo controller que getUserById, pero pasando por isAuth.
+// Si enviandole el id por params y el Bearer Token del localStorage por las headers devuelve el usuariuo, entonces está logueado correctamente
 
 module.exports = usersRouter;

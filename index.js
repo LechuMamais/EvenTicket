@@ -37,7 +37,7 @@ app.use("/api", (req, res, next) => {
 
 // Manejo de rutas no encontradas
 app.use("*", (req, res, next) => {
-    return res.status(404).json("Route Not Found");
+    return res.status(404).json("404 - Route Not Found");
 });
 
 // Escuchar en el puerto 3000

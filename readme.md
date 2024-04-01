@@ -45,9 +45,9 @@ El backend devuelve en los siguientes endpoints:
         Se utiliza para saber si el usuario está correctamente logueado. Requiere autenticación.
 
     Manage Assitance:
-    PUT /api/addAssistance/:userId/:eventId : Confirma asistencia a un evento. Se agrega el evento a la lista de eventos a los que el usuario asistirá, y 
+    PUT /api/manageAssistance/addAssistance/:userId/:eventId : Confirma asistencia a un evento. Se agrega el evento a la lista de eventos a los que el usuario asistirá, y 
         se agrega el usuario a la lista de asistentes del evento. Requiere autenticación.
-    PUT /api/removeAssistance/:userId/:eventId : Cancela asistencia a un evento. Se quita el evento de la lista de eventos a los que el usuario asistirá, y 
+    PUT /api/manageAssistance/removeAssistance/:userId/:eventId : Cancela asistencia a un evento. Se quita el evento de la lista de eventos a los que el usuario asistirá, y 
         se quita el usuario de la lista de asistentes del evento. Requiere autenticación.
 
 Autenticación y Autorización

@@ -25,46 +25,35 @@ Endpoints de la API
     events y usuarios tienen su CRUD básico, pero además hay rutas que ejecutan controllers en ambos, las cuales están definidas en el archivo
     manageAssistance.js
 
-El backend expone los siguientes endpoints de la API:
+El backend devuelve en los siguientes endpoints:
 
+    Events:
     GET /api/events: Obtiene una lista de todos los eventos.
     GET /api/events/:id: Obtiene un evento específico por su ID.
-    POST /api/events: Crea un nuevo evento.
-    PUT /api/events/:id: Actualiza un evento existente.
-    DELETE /api/events/:id: Elimina un evento existente.
+    POST /api/events/newEvent: Crea un nuevo evento. Requiere autenticación.
+    PUT /api/events/:id: Actualiza un evento existente. Requiere autenticación.
+    DELETE /api/events/:id: Elimina un evento existente. Requiere autenticación.
 
+    Users:
     GET /api/users: Obtiene una lista de todos los usuarios.
     GET /api/users/:id: Obtiene un usuario específico por su ID.
     POST /api/users/register: Crea un nuevo usuario.
     PUT /api/users/login: Login
-    PUT /api/users/:id: Actualiza un usuario existente.
-    DELETE /api/users/:id: Elimina un usuario existente.
-    GET /api/users/checkLogged/:id: Ejecuta el mismo controller que getById, pero sólo si la autenticación es correcta. 
-        Se utiliza para saber si el usuario está correctamente logueado.
+    PUT /api/users/:id: Actualiza un usuario existente. Requiere autenticación.
+    DELETE /api/users/:id: Elimina un usuario existente. Requiere autenticación.
+    GET /api/users/checkLogged/:id: Ejecuta el mismo controller que GET /api/users/:id, pero sólo si la autenticación es correcta.
+        Se utiliza para saber si el usuario está correctamente logueado. Requiere autenticación.
 
-    Manage Assitance
+    Manage Assitance:
     PUT /api/addAssistance/:userId/:eventId : Confirma asistencia a un evento. Se agrega el evento a la lista de eventos a los que el usuario asistirá, y 
-        se agrega el usuario a la lista de asistentes del evento
+        se agrega el usuario a la lista de asistentes del evento. Requiere autenticación.
     PUT /api/removeAssistance/:userId/:eventId : Cancela asistencia a un evento. Se quita el evento de la lista de eventos a los que el usuario asistirá, y 
-        se quita el usuario de la lista de asistentes del evento
+        se quita el usuario de la lista de asistentes del evento. Requiere autenticación.
 
 Autenticación y Autorización
 
-La autenticación en la API se gestiona utilizando tokens JWT. Los usuarios deben autenticarse con sus credenciales (correo electrónico y contraseña) para acceder a ciertos endpoints protegidos.
-Endpoints Protegidos:
-
-    GET /api/events/user/:userId: Obtiene eventos creados por un usuario específico.
-    POST /api/events: Crea un nuevo evento asociado al usuario autenticado.
-    PUT /api/events/:id: Actualiza un evento existente solo si el usuario es el propietario del evento.
-
-    PUT /api/users/:id: Actualiza un usuario existente.
-    DELETE /api/users/:id: Elimina un usuario existente.
-
-    PUT /api/addAssistance/:userId/:eventId : Confirma asistencia a un evento. Se agrega el evento a la lista de eventos a los que el usuario asistirá, y 
-        se agrega el usuario a la lista de asistentes del evento
-    PUT /api/removeAssistance/:userId/:eventId : Cancela asistencia a un evento. Se quita el evento de la lista de eventos a los que el usuario asistirá, y 
-        se quita el usuario de la lista de asistentes del evento
-
+La autenticación en la API se gestiona utilizando tokens JWT. Los usuarios deben autenticarse con sus credenciales (correo electrónico y contraseña) para acceder a ciertos endpoints protegidos. Una vez iniciada la sesión, se almacena userId, userName y bearer Token en localStorage. UserId y accessToken son
+necesarios para que la autenticación se realice correctamente, se reciben en req.body
 
 Base de Datos
 
